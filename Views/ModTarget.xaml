@@ -5,14 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:rdrtwocontentmanager.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="1000" Width="1000">
-    <StackPanel Width="1000">
+             d:DesignHeight="450" d:DesignWidth="980" Width="980">
+    <StackPanel Width="980">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="3*"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -22,7 +22,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Border Grid.Row="0" Grid.Column="0" Padding="970 0 0 0">
+            <Border Grid.Row="0" Grid.Column="0" Padding="950 0 0 0">
                 <Button Content="X" Name="bExit" Click="bExit_Click"/>
             </Border>
             <Border Grid.Row="1" Grid.Column="0" Padding="0 5 500 5">
@@ -38,7 +38,7 @@
                 <Border Padding="0 5 10 5">
                     <Button Content="Refresh" Width="100" Name="bRefresh" />
                 </Border>
-                <Border Padding="566 5 0 5">
+                <Border Padding="546 5 0 5">
                     <Button Content="Mods" Width="100" Name="bModSources" />
                 </Border>
             </StackPanel>
@@ -46,14 +46,14 @@
                 <TextBlock Text="List of Mod Targets:  " />
             </Border>
             <Border Grid.Row="4" Grid.Column="0" Padding="0 5 0 5">
-                <DataGrid Name="dgTarget" MinHeight="150" Width="1000" />
+                <DataGrid Name="dgTarget" MinHeight="150" Width="979" />
             </Border>
             <Border Grid.Row="5" Grid.Column="0" Padding="0 5 400 5">
                 <TextBlock Text="File Location To Apply Mod:  " />
             </Border>
             <StackPanel Grid.Row="6" Grid.Column="0" Orientation="Horizontal">
                 <Border Padding="0 5 10 5">
-                    <TextBox Name="tbFileLocation" Width="960" />
+                    <TextBox Name="tbFileLocation" Width="938" />
                 </Border>
                 <Border Padding="0 5 0 5">
                     <Button Name="bFileSelect" Content="..." Width="30" />
@@ -63,7 +63,7 @@
                 <TextBlock Text="Mod Target Name:  " />
             </Border>
             <Border Grid.Row="8" Grid.Column="0" Padding="0 0 0 0" HorizontalAlignment="Left">
-                <TextBox Width="982" />
+                <TextBox Width="938" />
             </Border>
         </Grid>
     </StackPanel>

@@ -37,9 +37,7 @@
                 </Border>
                 <Image Grid.Column="0" Grid.ColumnSpan="5" />
             </Grid>
-            <ContentControl Name="ccMainContentContainer">
-
-            </ContentControl>
+            <ContentControl Name="ccMainContentContainer" Margin="0,5,0,0"/>
         </StackPanel>
     </Border>
     
