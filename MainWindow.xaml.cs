@@ -15,6 +15,7 @@ namespace rdrtwocontentmanager
 
         private void BModTargetLauncher_Click(object sender, RoutedEventArgs e)
         {
+            if (ccMainContentContainer.Content != null) ccMainContentContainer.Content = null;
             ccMainContentContainer.Content = new ModTarget(ccMainContentContainer);
         }
     }
