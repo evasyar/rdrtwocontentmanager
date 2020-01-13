@@ -30,10 +30,10 @@
             </Border>
             <StackPanel Grid.Row="2" Orientation="Horizontal">
                 <Border Padding="0 5 10 5">
-                    <Button Content="Post" Width="100" Name="bPost" />
+                    <Button Content="Post" Width="100" Name="bPost" Click="bPost_Click" />
                 </Border>
                 <Border Padding="0 5 10 5">
-                    <Button Content="Delete" Width="100" Name="bDelete" />
+                    <Button Content="Delete" Width="100" Name="bDelete" Click="bDelete_Click" />
                 </Border>
                 <Border Padding="0 5 10 5">
                     <Button Content="Refresh" Width="100" Name="bRefresh" />
@@ -46,7 +46,7 @@
                 <TextBlock Text="List of Mod Targets:  " />
             </Border>
             <Border Grid.Row="4" Grid.Column="0" Padding="0 5 0 5">
-                <DataGrid Name="dgTarget" MinHeight="150" Width="979" />
+                <DataGrid Name="dgTarget" ItemsSource="{Binding TargetToBind}" AutoGenerateColumns="True" MinHeight="150" Width="979" />
             </Border>
             <Border Grid.Row="5" Grid.Column="0" Padding="0 5 400 5">
                 <TextBlock Text="File Location To Apply Mod:  " />
@@ -63,7 +63,7 @@
                 <TextBlock Text="Mod Target Name:  " />
             </Border>
             <Border Grid.Row="8" Grid.Column="0" Padding="0 0 0 0" HorizontalAlignment="Left">
-                <TextBox Width="938" />
+                <TextBox Name="tbModTargetName" Width="938" />
             </Border>
         </Grid>
     </StackPanel>

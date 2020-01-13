@@ -8,6 +8,15 @@ namespace rdrtwocontentmanager.Helper
     {
     }
 
+    public static class Defaults
+    {
+        public static string DbName { get; set; } = @"Rdr2ModsDb";
+        public static string Targets { get; set; } = @"targets";
+        public static string Mods { get; set; } = @"mods";
+        public static string ModFiles { get; set; } = @"modfiles";
+        public static string Logs { get; set; } = @"logs";
+    }
+
     public class PlaceHolderTextBox : System.Windows.Forms.TextBox
     {
 

@@ -1,7 +1,8 @@
-﻿using rdrtwocontentmanager.Helper;
+﻿using LiteDB;
+using rdrtwocontentmanager.Helper;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace rdrtwocontentmanager.Models
 {
@@ -14,19 +15,91 @@ namespace rdrtwocontentmanager.Models
         public Target Post(Target target)
         {
             Target retval = new Target();
-            using (TargetDbHelper db = new TargetDbHelper())
+            using (var db = new LiteDatabase(Defaults.DbName))
             {
                 try
                 {
+                    //  if data invalid then throw error                   
+                    var targets = db.GetCollection<Target>(Defaults.Targets);
+                    //  target name and location are required
+                    if (string.IsNullOrWhiteSpace(target.Root))
+                        throw new Exception(@"Mod target file location cannot be empty");
+                    if (string.IsNullOrWhiteSpace(target.RootName))
+                        throw new Exception(@"Mod target name cannot be empty");
+                    if (targets.Exists(e => e.Root.ToLower() == target.Root.ToLower())) 
+                        throw new Exception(string.Format(@"Mod Target {0} already exist in DB", target.Root));
+                    if (targets.Exists(e => e.RootName.ToLower() == target.RootName.ToLower()))
+                        throw new Exception(string.Format(@"Mod Target Name {0} already used in DB", target.RootName));
+                    target.Id = new Guid().ToString();
                     target.creationDate = DateTime.Now;
                     target.modifiedDate = DateTime.Now;
                     target.modifiedBy = UserHelper.GetWinUser();
-                    db.Post(target);
+                    targets.Insert(target);
+                    LogHelper.Log(string.Format(@"New mod target:{0}, located at file location:{1} posted in DB", target.RootName, target.Root));
                 }
                 catch (Exception ex)
                 {
                     LogHelper.LogError(ex.Message);
                     retval = new Target();
+                }
+            }
+            return retval;
+        }
+
+        public void Delete(Target target)
+        {
+            using (var db = new LiteDatabase(Defaults.DbName))
+            {
+                try
+                {
+                    //  if data invalid then throw error                   
+                    var targets = db.GetCollection<Target>(Defaults.Targets);
+                    targets.Delete(target.Id);
+                    LogHelper.Log(string.Format(@"Mod target:{0} deleted from DB", target.Id));
+                }
+                catch (Exception ex)
+                {
+                    LogHelper.LogError(ex.Message);                    
+                }
+            }
+        }
+
+        public List<Target> Get()
+        {
+            List<Target> retval = new List<Target>();
+            using (var db = new LiteDatabase(Defaults.DbName))
+            {
+                try
+                {
+                    var targets = db.GetCollection<Target>(Defaults.Targets);
+                    retval = targets.Find(Query.All("creationDate", Query.Descending)).ToList();
+                }
+                catch (Exception ex)
+                {
+                    LogHelper.LogError(ex.Message);
+                }
+            }
+            return retval;
+        }
+
+        public List<Target> Search(string keyword)
+        {
+            List<Target> retval = new List<Target>();
+            using (var db = new LiteDatabase(Defaults.DbName))
+            {
+                try
+                {
+                    var targets = db.GetCollection<Target>(Defaults.Targets);
+                    retval = targets.FindAll().Where(e => e.Id.ToLower().Contains(keyword.ToLower())
+                    || e.creationDate.ToLongDateString().Contains(keyword)
+                    || e.modifiedBy.ToLower().Contains(keyword.ToLower())
+                    || e.modifiedDate.ToLongTimeString().Contains(keyword)
+                    || e.Root.ToLower().Contains(keyword.ToLower())
+                    || e.RootName.ToLower().Contains(keyword.ToLower())).ToList();
+                }
+                catch (Exception ex)
+                {
+                    LogHelper.LogError(ex.Message);
                 }
             }
             return retval;
