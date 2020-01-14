@@ -24,7 +24,7 @@
                     <Button Name="BModTargetLauncher" Content="Start" Click="BModTargetLauncher_Click" />
                 </Border>
                 <Border Grid.Row="1" Grid.Column="1" Padding="0 5 5 0">
-                    <Button Content="Logs" />
+                    <Button Name="BLogsLauncher" Content="Logs" Click="BLogsLauncher_Click" />
                 </Border>
                 <Border Grid.Row="1" Grid.Column="2" Padding="0 5 5 0">
                     <Button Grid.Column="2" Grid.Row="1" Content="Target DB" />

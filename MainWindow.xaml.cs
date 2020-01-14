@@ -18,5 +18,11 @@ namespace rdrtwocontentmanager
             if (ccMainContentContainer.Content != null) ccMainContentContainer.Content = null;
             ccMainContentContainer.Content = new ModTarget(ccMainContentContainer);
         }
+
+        private void BLogsLauncher_Click(object sender, RoutedEventArgs e)
+        {
+            if (ccMainContentContainer.Content != null) ccMainContentContainer.Content = null;
+            ccMainContentContainer.Content = new AppLogs(ccMainContentContainer);
+        }
     }
 }

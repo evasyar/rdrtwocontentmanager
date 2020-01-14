@@ -73,6 +73,7 @@ namespace rdrtwocontentmanager.Models
                 {
                     var targets = db.GetCollection<Target>(Defaults.Targets);
                     retval = targets.Find(Query.All("creationDate", Query.Descending)).ToList();
+                    LogHelper.Log(@"List of mod targets returned");
                 }
                 catch (Exception ex)
                 {
@@ -96,6 +97,7 @@ namespace rdrtwocontentmanager.Models
                     || e.modifiedDate.ToLongTimeString().Contains(keyword)
                     || e.Root.ToLower().Contains(keyword.ToLower())
                     || e.RootName.ToLower().Contains(keyword.ToLower())).ToList();
+                    LogHelper.Log(@"Search of mod targets completed");
                 }
                 catch (Exception ex)
                 {
