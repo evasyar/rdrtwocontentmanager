@@ -34,7 +34,7 @@
                         <Button Name="BLogsLauncher" Content="Logs" Click="BLogsLauncher_Click" />
                     </Border>
                     <Border Grid.Row="1" Grid.Column="2" Padding="0 5 5 0">
-                        <Button Grid.Column="2" Grid.Row="1" Content="Target DB" />
+                        <Button Name="BTargetDbLauncher" Content="Target DB" Click="BTargetDbLauncher_Click" />
                     </Border>
                     <Border Grid.Row="1" Grid.Column="3" Padding="0 5 5 0">
                         <Button Grid.Column="3" Grid.Row="1" Content="Mods DB" />

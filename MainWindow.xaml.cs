@@ -24,5 +24,11 @@ namespace rdrtwocontentmanager
             if (ccMainContentContainer.Content != null) ccMainContentContainer.Content = null;
             ccMainContentContainer.Content = new AppLogs(ccMainContentContainer);
         }
+
+        private void BTargetDbLauncher_Click(object sender, RoutedEventArgs e)
+        {
+            if (ccMainContentContainer.Content != null) ccMainContentContainer.Content = null;
+            ccMainContentContainer.Content = new TargetDbView(ccMainContentContainer);
+        }
     }
 }
