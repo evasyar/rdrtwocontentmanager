@@ -6,56 +6,56 @@ using System.Linq;
 
 namespace rdrtwocontentmanager.Models
 {
-    public class TargetDbHelper : IDisposable
+    public class ModifierDbHelper : IDisposable
     {
 
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls
 
-        public Target Post(Target target)
+        public Modifier Post(Modifier modifier)
         {
-            Target retval = new Target();
+            Modifier retval = new Modifier();
             using (var db = new LiteDatabase(Defaults.DbName))
             {
                 try
                 {
                     //  if data invalid then throw error                   
-                    var targets = db.GetCollection<Target>(Defaults.Targets);
+                    var mods = db.GetCollection<Modifier>(Defaults.Mods);
                     //  target name and location are required
-                    if (string.IsNullOrWhiteSpace(target.Root))
-                        throw new Exception(@"Mod target file location cannot be empty");
-                    if (string.IsNullOrWhiteSpace(target.RootName))
-                        throw new Exception(@"Mod target name cannot be empty");
-                    if (targets.Exists(e => e.Root.ToLower() == target.Root.ToLower())) 
-                        throw new Exception(string.Format(@"Mod Target {0} already exist in DB", target.Root));
-                    if (targets.Exists(e => e.RootName.ToLower() == target.RootName.ToLower()))
-                        throw new Exception(string.Format(@"Mod Target Name {0} already used in DB", target.RootName));
-                    target.Id = Guid.NewGuid().ToString();
-                    target.creationDate = DateTime.Now;
-                    target.modifiedDate = DateTime.Now;
-                    target.modifiedBy = UserHelper.GetWinUser();
-                    targets.Insert(target);
-                    LogHelper.Log(string.Format(@"New mod target:{0}, located at file location:{1} posted in DB", target.RootName, target.Root));
+                    if (string.IsNullOrWhiteSpace(modifier.FileName))
+                        throw new Exception(@"Mod target file name cannot be empty");
+                    if (string.IsNullOrWhiteSpace(modifier.Source))
+                        throw new Exception(@"Mod Modifier source cannot be empty");
+                    if (mods.Exists(e => e.Source.ToLower() == modifier.Source.ToLower())) 
+                        throw new Exception(string.Format(@"Mod Modifier {0} already exist in DB", modifier.Source));
+                    if (mods.Exists(e => e.FileName.ToLower() == modifier.FileName.ToLower()))
+                        throw new Exception(string.Format(@"Mod Modifier Filename {0} already used in DB", modifier.FileName));
+                    modifier.Id = Guid.NewGuid().ToString();
+                    modifier.creationDate = DateTime.Now;
+                    modifier.modifiedDate = DateTime.Now;
+                    modifier.modifiedBy = UserHelper.GetWinUser();
+                    mods.Insert(modifier);
+                    LogHelper.Log(string.Format(@"New mod Modifier:{0}, located at file location:{1} posted in DB", modifier.FileName, modifier.Source));
                 }
                 catch (Exception ex)
                 {
                     LogHelper.LogError(ex.Message);
-                    retval = new Target();
+                    retval = new Modifier();
                 }
             }
             return retval;
         }
 
-        public void Delete(Target target)
+        public void Delete(Modifier modifier)
         {
             using (var db = new LiteDatabase(Defaults.DbName))
             {
                 try
                 {
                     //  if data invalid then throw error                   
-                    var targets = db.GetCollection<Target>(Defaults.Targets);
-                    targets.Delete(target.Id);
-                    LogHelper.Log(string.Format(@"Mod target:{0} deleted from DB", target.Id));
+                    var mods = db.GetCollection<Modifier>(Defaults.Mods);
+                    mods.Delete(modifier.Id);
+                    LogHelper.Log(string.Format(@"Mod Modifier:{0} deleted from DB", modifier.Id));
                 }
                 catch (Exception ex)
                 {
@@ -64,16 +64,16 @@ namespace rdrtwocontentmanager.Models
             }
         }
 
-        public List<Target> Get()
+        public List<Modifier> Get()
         {
-            List<Target> retval = new List<Target>();
+            List<Modifier> retval = new List<Modifier>();
             using (var db = new LiteDatabase(Defaults.DbName))
             {
                 try
                 {
-                    var targets = db.GetCollection<Target>(Defaults.Targets);
-                    retval = targets.Find(Query.All("creationDate", Query.Descending)).ToList();
-                    LogHelper.Log(@"List of mod targets returned");
+                    var mods = db.GetCollection<Modifier>(Defaults.Mods);
+                    retval = mods.Find(Query.All("creationDate", Query.Descending)).ToList();
+                    LogHelper.Log(@"List of Modifiers returned");
                 }
                 catch (Exception ex)
                 {
@@ -83,25 +83,27 @@ namespace rdrtwocontentmanager.Models
             return retval;
         }
 
-        public List<Target> Search(string keyword)
+        public List<Modifier> Search(string keyword)
         {
-            List<Target> retval = new List<Target>();
+            List<Modifier> retval = new List<Modifier>();
             using (var db = new LiteDatabase(Defaults.DbName))
             {
                 try
                 {
-                    var targets = db.GetCollection<Target>(Defaults.Targets);
-                    retval = targets.FindAll().Where(e => e.Id.ToLower().Contains(keyword.ToLower())
+                    var mods = db.GetCollection<Modifier>(Defaults.Mods);
+                    retval = mods.FindAll().Where(e => e.Id.ToLower().Contains(keyword.ToLower())
                     || e.creationDate.ToLongDateString().Contains(keyword)
                     || e.modifiedBy.ToLower().Contains(keyword.ToLower())
                     || e.modifiedDate.ToLongTimeString().Contains(keyword)
-                    || e.Root.ToLower().Contains(keyword.ToLower())
-                    || e.RootName.ToLower().Contains(keyword.ToLower())).ToList();
+                    || e.Source.ToLower().Contains(keyword.ToLower())
+                    || e.ModifierId.ToLower().Contains(keyword.ToLower())
+                    || e.Subfolder.ToLower().Contains(keyword.ToLower())
+                    || e.FileName.ToLower().Contains(keyword.ToLower())).ToList();
                     if (retval.Count < 0)
                     {
                         retval = Get();
                     }
-                    LogHelper.Log(@"Search of mod targets completed");
+                    LogHelper.Log(@"Search of mod Modifiers completed");
                 }
                 catch (Exception ex)
                 {
@@ -128,7 +130,7 @@ namespace rdrtwocontentmanager.Models
         }
 
         // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
-        // ~TargetDbHelper()
+        // ~ModifierDbHelper()
         // {
         //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
         //   Dispose(false);
