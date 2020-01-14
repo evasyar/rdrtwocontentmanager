@@ -45,9 +45,13 @@
             <Border Grid.Row="3" Grid.Column="0" Padding="0 5 500 5">
                 <TextBlock Text="List of Mod Targets:  " />
             </Border>
-            <Border Grid.Row="4" Grid.Column="0" Padding="0 5 0 5">
-                <DataGrid Name="dgTarget" ItemsSource="{Binding TargetToBind}" AutoGenerateColumns="True" MinHeight="150" Width="979" />
-            </Border>
+            <DataGrid 
+                Grid.Row="4" Grid.Column="0" 
+                Padding="0 5 0 5"
+                Name="dgTarget" 
+                IsReadOnly="True" 
+                HorizontalAlignment="Left" 
+                SelectionUnit="FullRow" Loaded="dgTarget_Loaded" SelectionChanged="dgTarget_SelectionChanged" />
             <Border Grid.Row="5" Grid.Column="0" Padding="0 5 400 5">
                 <TextBlock Text="File Location To Apply Mod:  " />
             </Border>

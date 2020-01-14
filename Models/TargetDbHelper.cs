@@ -30,7 +30,7 @@ namespace rdrtwocontentmanager.Models
                         throw new Exception(string.Format(@"Mod Target {0} already exist in DB", target.Root));
                     if (targets.Exists(e => e.RootName.ToLower() == target.RootName.ToLower()))
                         throw new Exception(string.Format(@"Mod Target Name {0} already used in DB", target.RootName));
-                    target.Id = new Guid().ToString();
+                    target.Id = Guid.NewGuid().ToString();
                     target.creationDate = DateTime.Now;
                     target.modifiedDate = DateTime.Now;
                     target.modifiedBy = UserHelper.GetWinUser();

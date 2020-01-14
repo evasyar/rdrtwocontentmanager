@@ -1,5 +1,5 @@
 ﻿using rdrtwocontentmanager.Models;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -11,13 +11,13 @@ namespace rdrtwocontentmanager.Views
     public partial class AppLogs : UserControl
     {
         public ContentControl ParentContainer { get; set; }
-        public ObservableCollection<AppLog> ocAppLogs { get; set; } = new ObservableCollection<AppLog>();
+        public AppLog SelectedAppLog { get; set; } = new AppLog();
         public AppLogs(object parentContainer)
         {
             InitializeComponent();
             ParentContainer = (ContentControl)parentContainer;
             using var db = new AppLogDbHelper();
-            ocAppLogs = new ObservableCollection<AppLog>(db.Get());
+            dgAppLogs.ItemsSource = db.Get();
 
         }
 
@@ -25,7 +25,7 @@ namespace rdrtwocontentmanager.Views
         {
             //
             using var db = new AppLogDbHelper();
-            ocAppLogs = new ObservableCollection<AppLog>(db.Search((sender as TextBox).Text));
+            dgAppLogs.ItemsSource = db.Search((sender as TextBox).Text);
         }
 
         private void dgAppLogs_KeyUp(object sender, KeyEventArgs e)
@@ -33,13 +33,26 @@ namespace rdrtwocontentmanager.Views
             if (e.Key == Key.Enter)
             {
                 using var db = new AppLogDbHelper();
-                ocAppLogs = new ObservableCollection<AppLog>(db.Search((sender as TextBox).Text));
+                dgAppLogs.ItemsSource = db.Search((sender as TextBox).Text);
             }
         }
 
         private void bExit_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             ParentContainer.Content = null;
+        }
+
+        private void dgAppLogs_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            using var db = new AppLogDbHelper();
+            var grid = sender as DataGrid;
+            grid.ItemsSource = db.Get();
+        }
+
+        private void dgAppLogs_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (((DataGrid)sender).HasItems)
+                SelectedAppLog = ((DataGrid)sender).SelectedItem as AppLog;
         }
     }
 }

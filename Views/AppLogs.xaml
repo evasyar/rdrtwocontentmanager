@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:rdrtwocontentmanager.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="980" Width="980">
+             d:DesignHeight="450" d:DesignWidth="980" Width="980" Height="Auto">
     <StackPanel>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -27,11 +27,20 @@
             <Border Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Padding="0 0 0 0">
                 <TextBox Name="tbSearch" TextChanged="tbSearch_TextChanged" />
             </Border>
-            <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Padding="0 10 0 10">
-                <DataGrid Name="dgAppLogs" ItemsSource="{Binding ocAppLogs}" AutoGenerateColumns="True" IsReadOnly="True" KeyUp="dgAppLogs_KeyUp">
-                    
-                </DataGrid>
-            </Border>
+            <DataGrid 
+                Grid.Row="1" 
+                Grid.Column="0" 
+                Grid.ColumnSpan="4" 
+                HorizontalAlignment="Left" 
+                Margin="0 10 0 10" 
+                Name="dgAppLogs" 
+                IsReadOnly="True" 
+                SelectionUnit="FullRow"
+                KeyUp="dgAppLogs_KeyUp" 
+                Loaded="dgAppLogs_Loaded" 
+                SelectionChanged="dgAppLogs_SelectionChanged">
+
+            </DataGrid>
         </Grid>            
     </StackPanel>
 </UserControl>
