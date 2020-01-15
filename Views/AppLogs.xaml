@@ -6,33 +6,30 @@
              xmlns:local="clr-namespace:rdrtwocontentmanager.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="980" Width="980" Height="Auto">
-    <StackPanel>
-        <Grid>
+    <Border BorderBrush="Aquamarine" BorderThickness="1">
+        <Grid Width="980">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="30"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Border Grid.Row="0" Grid.Column="3" Padding="220 0 0 0">
-                <Button Content="X" Name="bExit" Click="bExit_Click" />
-            </Border>
-            <Border Grid.Row="0" Grid.Column="0" Padding="0 0 0 0">
-                <TextBlock Text="List of all Logs:" />
-            </Border>
-            <Border Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Padding="0 0 0 0">
-                <TextBox Name="tbSearch" TextChanged="tbSearch_TextChanged" />
-            </Border>
+            <WrapPanel Grid.Row="0" Grid.Column="0">
+                <Border Width="100" Padding="0 0 5 0">
+                    <TextBlock Text="List of all Logs:" />
+                </Border>
+                <Border Width="848" Padding="0 0 5 0">
+                    <TextBox Name="tbSearch" TextChanged="tbSearch_TextChanged" />
+                </Border>
+                <Border Width="30" Padding="0 0 0 0">
+                    <Button Content="X" Name="bExit" Click="bExit_Click" />
+                </Border>
+            </WrapPanel>
             <DataGrid 
                 Grid.Row="1" 
                 Grid.Column="0" 
-                Grid.ColumnSpan="4" 
-                HorizontalAlignment="Left" 
-                Margin="0 10 0 10" 
+                Margin="0 0 0 0" 
                 Name="dgAppLogs" 
                 IsReadOnly="True" 
                 SelectionUnit="FullRow"
@@ -41,6 +38,6 @@
                 SelectionChanged="dgAppLogs_SelectionChanged">
 
             </DataGrid>
-        </Grid>            
-    </StackPanel>
+        </Grid>
+    </Border>
 </UserControl>

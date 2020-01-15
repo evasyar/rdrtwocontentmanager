@@ -6,21 +6,21 @@
              xmlns:local="clr-namespace:rdrtwocontentmanager.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="980" Width="980">
-    <StackPanel Width="980">
+    <Border BorderBrush="Aquamarine" BorderThickness="1">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
             <Border Grid.Row="0" Grid.Column="0" Padding="950 0 0 0">
                 <Button Content="X" Name="bExit" Click="bExit_Click"/>
@@ -38,7 +38,7 @@
                 <Border Padding="0 5 10 5">
                     <Button Content="Refresh" Width="100" Name="bRefresh" />
                 </Border>
-                <Border Padding="546 5 0 5">
+                <Border Padding="0 5 0 5">
                     <Button Content="Mods" Width="100" Name="bModSources" Click="bModSources_Click" />
                 </Border>
             </StackPanel>
@@ -56,10 +56,10 @@
                 <TextBlock Text="File Location To Apply Mod:  " />
             </Border>
             <StackPanel Grid.Row="6" Grid.Column="0" Orientation="Horizontal">
-                <Border Padding="0 5 10 5">
+                <Border Padding="0 0 10 0">
                     <TextBox Name="tbFileLocation" Width="938" />
                 </Border>
-                <Border Padding="0 5 0 5">
+                <Border Padding="0 0 0 0">
                     <Button Name="bFileSelect" Content="..." Width="30" Click="bFileSelect_Click" />
                 </Border>
             </StackPanel>
@@ -70,5 +70,5 @@
                 <TextBox Name="tbModTargetName" Width="938" />
             </Border>
         </Grid>
-    </StackPanel>
+    </Border>
 </UserControl>
