@@ -17,57 +17,70 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Border 
-            Grid.Column="1" 
-            Grid.Row="0" Padding="820 0 0 0" >
+                Grid.Column="1" 
+                Grid.Row="0" 
+                Padding="820 0 0 2" >
                 <Button Name="btnExit" Content="X" Click="btnExit_Click" />
             </Border>
             <WrapPanel Grid.Row="1" Grid.Column="0" Width="130" Margin="0 0 0 0">
                 <Border Width="130">
-                    <TextBlock Text="Modifier File Map:" Background="Aquamarine" Width="128" />
+                    <TextBlock Text="Modifier Updates:" Background="Aquamarine" Width="128" />
                 </Border>
                 <Border Width="130">
-                    <Button Content="File Select" Width="128" />
+                    <Button Content="Post" Width="128" />
                 </Border>
                 <Border Width="130">
-                    <Button Content="Delete Mod" Width="128" />
-                </Border>
-                <Border Width="130">
-                    <Button Content="Refresh" Width="128" />
-                </Border>
-                <Border Width="130">
-                    <TextBlock Text="Modifier Applications:" Background="Aquamarine" Width="128" />
-                </Border>
-                <Border Width="130">
-                    <Button Content="File Select" Width="128" />
-                </Border>
-                <Border Width="130">
-                    <Button Content="Delete Mod" Width="128" />
+                    <Button Content="Delete" Width="128" />
                 </Border>
                 <Border Width="130">
                     <Button Content="Refresh" Width="128" />
                 </Border>
                 <Border Width="130">
-                    <TextBlock Width="128" HorizontalAlignment="Left" Text="Go To:" Background="Aquamarine" />
+                    <TextBlock Width="128" HorizontalAlignment="Left" Text="Go:" Background="Aquamarine" />
                 </Border>
-                <Border Width="128">
-                    <Button Name="btnModTarget" Content="Mod Target" Width="130" Click="btnModTarget_Click" />
+                <Border Width="65">
+                    <Button Name="btnModTarget" Content="back" Width="65" Click="btnModTarget_Click" />
+                </Border>
+                <Border Width="65">
+                    <Button Name="btnModFiles" Content="forw" Width="65" />
                 </Border>
             </WrapPanel>
             <WrapPanel
                 Grid.Row="1" 
                 Grid.Column="1" 
                 Width="850">
+                <Border Width="850" Padding="5 0 0 5" Background="Aquamarine">
+                    <TextBlock HorizontalAlignment="Center" Text="List Of Current Mods" />
+                </Border>
+                <Border Width="850" Padding="5 0 0 5">
+                    <DataGrid Name="dgList" />
+                </Border>
                 <Border Width="100" Padding="5 0 5 0">
-                    <TextBlock Text="Custom File:" Background="Aquamarine" />
+                    <TextBlock Text="Source:" Background="Aquamarine" />
                 </Border>
-                <Border Width="650" Padding="0 0 5 0">
-                    <TextBox />
+                <Border Width="720" Padding="0 0 5 0">
+                    <TextBox Name="tbSource" />
                 </Border>
-                <Border Width="100">
-                    <Button Content="Add Customn File" />
+                <Border Width="30">
+                    <Button Name="btnFolderSelect" Content="..." />
                 </Border>
-                <Border Width="850" Padding="5 5 0 0">
-                    <DataGrid />
+                <Border Width="100" Padding="5 2 5 0">
+                    <TextBlock Text="Name:" Background="Aquamarine" />
+                </Border>
+                <Border Width="720" Padding="0 2 5 0">
+                    <TextBox Name="tbName" />
+                </Border>
+                <Border Width="100" Padding="5 2 5 0">
+                    <TextBlock Text="Version:" Background="Aquamarine" />
+                </Border>
+                <Border Width="720" Padding="0 2 5 0">
+                    <TextBox Name="tbVersion" />
+                </Border>
+                <Border Width="100" Padding="5 2 5 0">
+                    <TextBlock Text="Release Date:" Background="Aquamarine" />
+                </Border>
+                <Border Width="720" Padding="0 2 5 0">
+                    <TextBox Name="ReleaseDate" />
                 </Border>
             </WrapPanel>
         </Grid>
