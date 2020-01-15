@@ -39,7 +39,7 @@
                     <Button Content="Refresh" Width="100" Name="bRefresh" />
                 </Border>
                 <Border Padding="546 5 0 5">
-                    <Button Content="Mods" Width="100" Name="bModSources" />
+                    <Button Content="Mods" Width="100" Name="bModSources" Click="bModSources_Click" />
                 </Border>
             </StackPanel>
             <Border Grid.Row="3" Grid.Column="0" Padding="0 5 500 5">

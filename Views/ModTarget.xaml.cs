@@ -99,5 +99,11 @@ namespace rdrtwocontentmanager.Views
                 LogHelper.Log(string.Format(@"mod target id:{0}, mod target:{1} selected!", SelectedTarget.Id, SelectedTarget.RootName));
             }
         }
+
+        private void bModSources_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (ParentContainer.Content != null) ParentContainer.Content = null;
+            ParentContainer.Content = new ModifierView(ParentContainer, SelectedTarget);
+        }
     }
 }
