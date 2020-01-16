@@ -3,7 +3,6 @@ using rdrtwocontentmanager.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace rdrtwocontentmanager.Models
 {
@@ -42,8 +41,8 @@ namespace rdrtwocontentmanager.Models
                     || e.Log.ToLower().Contains(keyword.ToLower())
                     || e.LogType.ToLower().Contains(keyword.ToLower())
                     || e.modifiedBy.ToLower().Contains(keyword.ToLower())
-                    || e.creationDate.ToLongDateString().Contains(keyword)
-                    || e.modifiedDate.ToLongDateString().Contains(keyword))
+                    || e.creationDate.ToShortDateString().Contains(keyword)
+                    || e.modifiedDate.ToShortDateString().Contains(keyword))
                 .ToList();
         }
 

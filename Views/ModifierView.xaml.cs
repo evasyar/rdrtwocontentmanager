@@ -1,23 +1,18 @@
-﻿using rdrtwocontentmanager.Models;
+﻿using rdrtwocontentmanager.Helper;
+using rdrtwocontentmanager.Models;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Globalization;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Forms;
 
 namespace rdrtwocontentmanager.Views
 {
     /// <summary>
     /// Interaction logic for ModifierView.xaml
     /// </summary>
-    public partial class ModifierView : UserControl
+    public partial class ModifierView : System.Windows.Controls.UserControl
     {
         public ContentControl ParentContainer { get; set; }
         public Target CapTarget { get; set; }
@@ -26,6 +21,7 @@ namespace rdrtwocontentmanager.Views
             InitializeComponent();
             ParentContainer = (ContentControl)parentContainer;
             CapTarget = ParentTarget;
+            RefreshList(CapTarget);
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
@@ -36,7 +32,73 @@ namespace rdrtwocontentmanager.Views
         private void btnModTarget_Click(object sender, RoutedEventArgs e)
         {
             if (ParentContainer.Content != null) ParentContainer.Content = null;
-            ParentContainer.Content = new ModTarget(ParentContainer);
+            ParentContainer.Content = new ModTarget(ParentContainer) { SelectedTarget = CapTarget };
+        }
+
+        private void btnFolderSelect_Click(object sender, RoutedEventArgs e)
+        {
+            using (FolderBrowserDialog fbd = new FolderBrowserDialog())
+            {
+                if (fbd.ShowDialog() == DialogResult.OK)
+                {
+                    tbSource.Text = fbd.SelectedPath;
+                }
+            }
+        }
+
+        private void btnPost_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                using var mdb = new ModifierDbHelper();
+                mdb.Post(new Modifier() { 
+                    TargetId = CapTarget.Id, 
+                    Name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(tbName.Text), 
+                    ModifierVersion = tbVersion.Text, 
+                    Source = tbSource.Text, 
+                    ReleaseDate = Convert.ToDateTime(dpReleaseDate.SelectedDate)
+                });
+                RefreshList(CapTarget);
+                LogHelper.Log("New target recorded in database");
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(ex.Message);
+            }
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                using var mdb = new ModifierDbHelper();
+                mdb.Delete(CapTarget);
+                RefreshList(CapTarget);
+                LogHelper.Log(string.Format("Target:{0} removed from database", CapTarget.RootName));
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(ex.Message);
+            }
+        }
+
+        private void btnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            RefreshList(CapTarget);
+        }
+
+        private void RefreshList(Target target)
+        {
+            try
+            {
+                using var mdb = new ModifierDbHelper();
+                dgList.ItemsSource = mdb.Get().Where(e => e.TargetId == target.Id);
+                LogHelper.Log("Modifiers are loaded from database");
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(ex.Message);
+            }
         }
     }
 }

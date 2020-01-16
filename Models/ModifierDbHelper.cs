@@ -22,20 +22,20 @@ namespace rdrtwocontentmanager.Models
                     //  if data invalid then throw error                   
                     var mods = db.GetCollection<Modifier>(Defaults.Mods);
                     //  target name and location are required
-                    if (string.IsNullOrWhiteSpace(modifier.FileName))
+                    if (string.IsNullOrWhiteSpace(modifier.Name))
                         throw new Exception(@"Mod target file name cannot be empty");
                     if (string.IsNullOrWhiteSpace(modifier.Source))
                         throw new Exception(@"Mod Modifier source cannot be empty");
-                    if (mods.Exists(e => e.Source.ToLower() == modifier.Source.ToLower())) 
+                    if (mods.Exists(e => e.Source.ToLower() == modifier.Source.ToLower()))
                         throw new Exception(string.Format(@"Mod Modifier {0} already exist in DB", modifier.Source));
-                    if (mods.Exists(e => e.FileName.ToLower() == modifier.FileName.ToLower()))
-                        throw new Exception(string.Format(@"Mod Modifier Filename {0} already used in DB", modifier.FileName));
+                    if (mods.Exists(e => e.Name.ToLower() == modifier.Name.ToLower()))
+                        throw new Exception(string.Format(@"Mod Modifier Filename {0} already used in DB", modifier.Name));
                     modifier.Id = Guid.NewGuid().ToString();
                     modifier.creationDate = DateTime.Now;
                     modifier.modifiedDate = DateTime.Now;
                     modifier.modifiedBy = UserHelper.GetWinUser();
                     mods.Insert(modifier);
-                    LogHelper.Log(string.Format(@"New mod Modifier:{0}, located at file location:{1} posted in DB", modifier.FileName, modifier.Source));
+                    LogHelper.Log(string.Format(@"New mod Modifier:{0}, located at file location:{1} posted in DB", modifier.Name, modifier.Source));
                 }
                 catch (Exception ex)
                 {
@@ -54,12 +54,41 @@ namespace rdrtwocontentmanager.Models
                 {
                     //  if data invalid then throw error                   
                     var mods = db.GetCollection<Modifier>(Defaults.Mods);
+                    //  delete child records first so no orphans!
+                    using var mfd = new ModifierFileDbHelper();
+                    mfd.Delete(modifier);
+                    //  now delete the parent!
                     mods.Delete(modifier.Id);
                     LogHelper.Log(string.Format(@"Mod Modifier:{0} deleted from DB", modifier.Id));
                 }
                 catch (Exception ex)
                 {
-                    LogHelper.LogError(ex.Message);                    
+                    LogHelper.LogError(ex.Message);
+                }
+            }
+        }
+
+        public void Delete(Target target)
+        {
+            using (var db = new LiteDatabase(Defaults.DbName))
+            {
+                try
+                {
+                    //  if data invalid then throw error                   
+                    var mods = db.GetCollection<Modifier>(Defaults.Mods);
+                    foreach (var item in mods.FindAll().Where(e => e.TargetId == target.Id))
+                    {
+                        //  deleting all the child records first!
+                        using var mfd = new ModifierFileDbHelper();
+                        mfd.Delete(item);
+                        //  now delete the element
+                        mods.Delete(item.Id);
+                        LogHelper.Log(string.Format(@"Mod Modifier:{0} deleted from DB", item.Id));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LogHelper.LogError(ex.Message);
                 }
             }
         }
@@ -92,13 +121,13 @@ namespace rdrtwocontentmanager.Models
                 {
                     var mods = db.GetCollection<Modifier>(Defaults.Mods);
                     retval = mods.FindAll().Where(e => e.Id.ToLower().Contains(keyword.ToLower())
-                    || e.creationDate.ToLongDateString().Contains(keyword)
+                    || e.creationDate.ToShortDateString().Contains(keyword)
                     || e.modifiedBy.ToLower().Contains(keyword.ToLower())
-                    || e.modifiedDate.ToLongTimeString().Contains(keyword)
+                    || e.modifiedDate.ToShortDateString().Contains(keyword)
                     || e.Source.ToLower().Contains(keyword.ToLower())
-                    || e.ModifierId.ToLower().Contains(keyword.ToLower())
-                    || e.Subfolder.ToLower().Contains(keyword.ToLower())
-                    || e.FileName.ToLower().Contains(keyword.ToLower())).ToList();
+                    || e.TargetId.ToLower().Contains(keyword.ToLower())
+                    || e.ModifierVersion.ToLower().Contains(keyword.ToLower())
+                    || e.ReleaseDate.ToShortDateString().ToLower().Contains(keyword.ToLower())).ToList();
                     if (retval.Count < 0)
                     {
                         retval = Get();

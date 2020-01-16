@@ -54,6 +54,10 @@ namespace rdrtwocontentmanager.Models
                 {
                     //  if data invalid then throw error                   
                     var targets = db.GetCollection<Target>(Defaults.Targets);
+                    //  delete child records first!
+                    using var md = new ModifierDbHelper();
+                    md.Delete(target);
+                    //  now delete the parent!
                     targets.Delete(target.Id);
                     LogHelper.Log(string.Format(@"Mod target:{0} deleted from DB", target.Id));
                 }
@@ -92,9 +96,9 @@ namespace rdrtwocontentmanager.Models
                 {
                     var targets = db.GetCollection<Target>(Defaults.Targets);
                     retval = targets.FindAll().Where(e => e.Id.ToLower().Contains(keyword.ToLower())
-                    || e.creationDate.ToLongDateString().Contains(keyword)
+                    || e.creationDate.ToShortDateString().Contains(keyword)
                     || e.modifiedBy.ToLower().Contains(keyword.ToLower())
-                    || e.modifiedDate.ToLongTimeString().Contains(keyword)
+                    || e.modifiedDate.ToShortDateString().Contains(keyword)
                     || e.Root.ToLower().Contains(keyword.ToLower())
                     || e.RootName.ToLower().Contains(keyword.ToLower())).ToList();
                     if (retval.Count < 0)

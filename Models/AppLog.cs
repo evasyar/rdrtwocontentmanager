@@ -2,7 +2,7 @@
 
 namespace rdrtwocontentmanager.Models
 {
-    public class AppLog : AuditEntry
+    public class AppLog : RecordBase
     {
         public int Id { get; set; }
         public string LogType { get; set; }

@@ -27,13 +27,13 @@
                     <TextBlock Text="Modifier Updates:" Background="Aquamarine" Width="128" />
                 </Border>
                 <Border Width="130">
-                    <Button Content="Post" Width="128" />
+                    <Button Name="btnPost" Content="Post" Width="128" Click="btnPost_Click" />
                 </Border>
                 <Border Width="130">
-                    <Button Content="Delete" Width="128" />
+                    <Button Name="btnDelete" Content="Delete" Width="128" Click="btnDelete_Click" />
                 </Border>
                 <Border Width="130">
-                    <Button Content="Refresh" Width="128" />
+                    <Button Name="btnRefresh" Content="Refresh" Width="128" Click="btnRefresh_Click" />
                 </Border>
                 <Border Width="130">
                     <TextBlock Width="128" HorizontalAlignment="Left" Text="Go:" Background="Aquamarine" />
@@ -53,7 +53,7 @@
                     <TextBlock HorizontalAlignment="Center" Text="List Of Current Mods" />
                 </Border>
                 <Border Width="850" Padding="5 0 0 5">
-                    <DataGrid Name="dgList" />
+                    <DataGrid Name="dgList" SelectionUnit="FullRow" SelectionMode="Single" AlternatingRowBackground="Coral" />
                 </Border>
                 <Border Width="100" Padding="5 0 5 0">
                     <TextBlock Text="Source:" Background="Aquamarine" />
@@ -62,7 +62,7 @@
                     <TextBox Name="tbSource" />
                 </Border>
                 <Border Width="30">
-                    <Button Name="btnFolderSelect" Content="..." />
+                    <Button Name="btnFolderSelect" Content="..." Click="btnFolderSelect_Click" />
                 </Border>
                 <Border Width="100" Padding="5 2 5 0">
                     <TextBlock Text="Name:" Background="Aquamarine" />
@@ -73,14 +73,14 @@
                 <Border Width="100" Padding="5 2 5 0">
                     <TextBlock Text="Version:" Background="Aquamarine" />
                 </Border>
-                <Border Width="720" Padding="0 2 5 0">
+                <Border Width="400" Padding="0 2 5 0">
                     <TextBox Name="tbVersion" />
                 </Border>
                 <Border Width="100" Padding="5 2 5 0">
                     <TextBlock Text="Release Date:" Background="Aquamarine" />
                 </Border>
-                <Border Width="720" Padding="0 2 5 0">
-                    <TextBox Name="ReleaseDate" />
+                <Border Width="220" Padding="0 2 5 0">
+                    <DatePicker Name="dpReleaseDate" />
                 </Border>
             </WrapPanel>
         </Grid>

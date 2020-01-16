@@ -24,6 +24,10 @@ namespace rdrtwocontentmanager.Views
             TargetToBind = db.Get();
             dgTarget.ItemsSource = TargetToBind;
             LogHelper.Log("Mod target list initialized");
+            if (SelectedTarget != null)
+            {
+                DataGrid_SelectionChanged(dgTarget);
+            }
         }
 
         private void bExit_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -93,17 +97,22 @@ namespace rdrtwocontentmanager.Views
 
         private void dgTarget_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (((DataGrid)sender).HasItems)
-            {
-                SelectedTarget = ((DataGrid)sender).SelectedItem as Target;
-                LogHelper.Log(string.Format(@"mod target id:{0}, mod target:{1} selected!", SelectedTarget.Id, SelectedTarget.RootName));
-            }
+            DataGrid_SelectionChanged(sender);
         }
 
         private void bModSources_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             if (ParentContainer.Content != null) ParentContainer.Content = null;
             ParentContainer.Content = new ModifierView(ParentContainer, SelectedTarget);
+        }
+
+        private void DataGrid_SelectionChanged(object sender)
+        {
+            if (((DataGrid)sender).HasItems)
+            {
+                SelectedTarget = ((DataGrid)sender).SelectedItem as Target;
+                LogHelper.Log(string.Format(@"mod target id:{0}, mod target:{1} selected!", SelectedTarget.Id, SelectedTarget.RootName));
+            }
         }
     }
 }
