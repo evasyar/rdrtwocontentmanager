@@ -16,6 +16,7 @@ namespace rdrtwocontentmanager.Views
     {
         public ContentControl ParentContainer { get; set; }
         public Target CapTarget { get; set; }
+        public Modifier SelectedMod { get; set; }
         public ModifierView(object parentContainer, Target ParentTarget)
         {
             InitializeComponent();
@@ -98,6 +99,21 @@ namespace rdrtwocontentmanager.Views
             catch (Exception ex)
             {
                 LogHelper.LogError(ex.Message);
+            }
+        }
+
+        private void btnModFiles_Click(object sender, RoutedEventArgs e)
+        {
+            if (ParentContainer.Content != null) ParentContainer.Content = null;
+            ParentContainer.Content = new ModifierFileView(ParentContainer, SelectedMod, CapTarget);
+        }
+
+        private void dgList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (((DataGrid)sender).HasItems)
+            {
+                SelectedMod = (((DataGrid)sender).SelectedItem as Modifier) == null ? SelectedMod : ((DataGrid)sender).SelectedItem as Modifier;
+                LogHelper.Log(string.Format(@"mod id:{0}, mod:{1} selected!", SelectedMod.Id, SelectedMod.Name));
             }
         }
     }

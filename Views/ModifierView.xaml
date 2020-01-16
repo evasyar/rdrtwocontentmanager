@@ -42,7 +42,7 @@
                     <Button Name="btnModTarget" Content="back" Width="65" Click="btnModTarget_Click" />
                 </Border>
                 <Border Width="65">
-                    <Button Name="btnModFiles" Content="forw" Width="65" />
+                    <Button Name="btnModFiles" Content="forw" Width="65" Click="btnModFiles_Click" />
                 </Border>
             </WrapPanel>
             <WrapPanel
@@ -53,7 +53,7 @@
                     <TextBlock HorizontalAlignment="Center" Text="List Of Current Mods" />
                 </Border>
                 <Border Width="850" Padding="5 0 0 5">
-                    <DataGrid Name="dgList" SelectionUnit="FullRow" SelectionMode="Single" AlternatingRowBackground="Coral" />
+                    <DataGrid Name="dgList" SelectionUnit="FullRow" SelectionMode="Single" AlternatingRowBackground="Coral" SelectionChanged="dgList_SelectionChanged" />
                 </Border>
                 <Border Width="100" Padding="5 0 5 0">
                     <TextBlock Text="Source:" Background="Aquamarine" />
