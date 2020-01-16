@@ -15,17 +15,31 @@ namespace rdrtwocontentmanager.Views
         public ContentControl ParentContainer { get; set; }
         public Target SelectedTarget { get; set; }
         public List<Target> TargetToBind { get; set; }
-        public ModTarget(object parentContainer)
+        public ModTarget()
         {
-            InitializeComponent();
+            InitializeComponent();            
+        }
 
+        public ModTarget(object parentContainer) : this()
+        {
             ParentContainer = (parentContainer as ContentControl);
+            using TargetDbHelper db = new TargetDbHelper();
+            TargetToBind = db.Get();
+            dgTarget.ItemsSource = TargetToBind;
+            LogHelper.Log("Mod target list initialized");
+        }
+
+        public ModTarget(object parentContainer, Target parentTarget) : this()
+        {
+            ParentContainer = (parentContainer as ContentControl);
+            SelectedTarget = parentTarget;
             using TargetDbHelper db = new TargetDbHelper();
             TargetToBind = db.Get();
             dgTarget.ItemsSource = TargetToBind;
             LogHelper.Log("Mod target list initialized");
             if (SelectedTarget != null)
             {
+                dgTarget.SelectedItem = SelectedTarget;
                 DataGrid_SelectionChanged(dgTarget);
             }
         }
@@ -110,7 +124,7 @@ namespace rdrtwocontentmanager.Views
         {
             if (((DataGrid)sender).HasItems)
             {
-                SelectedTarget = ((DataGrid)sender).SelectedItem as Target;
+                SelectedTarget = (((DataGrid)sender).SelectedItem as Target) == null ? SelectedTarget : ((DataGrid)sender).SelectedItem as Target;
                 LogHelper.Log(string.Format(@"mod target id:{0}, mod target:{1} selected!", SelectedTarget.Id, SelectedTarget.RootName));
             }
         }

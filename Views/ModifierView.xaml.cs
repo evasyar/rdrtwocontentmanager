@@ -32,7 +32,7 @@ namespace rdrtwocontentmanager.Views
         private void btnModTarget_Click(object sender, RoutedEventArgs e)
         {
             if (ParentContainer.Content != null) ParentContainer.Content = null;
-            ParentContainer.Content = new ModTarget(ParentContainer) { SelectedTarget = CapTarget };
+            ParentContainer.Content = new ModTarget(ParentContainer, CapTarget);
         }
 
         private void btnFolderSelect_Click(object sender, RoutedEventArgs e)
