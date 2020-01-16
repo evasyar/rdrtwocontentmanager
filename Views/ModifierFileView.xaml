@@ -16,23 +16,24 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Border Grid.Row="0" Grid.Column="1" Padding="740 0 0 0">
+            <Border Grid.Row="0" Grid.Column="0" Background="Bisque"></Border>
+            <Border Grid.Row="0" Grid.Column="1" Padding="740 0 0 0" Background="Bisque">
                 <Button Name="btnExit" Content="X" Click="btnExit_Click" />
             </Border>
             <StackPanel Grid.Row="1" Grid.Column="0" >
-                <Border>
+                <Border Background="Bisque">
                     <TextBlock Text="File Map" />
                 </Border>
                 <Border>
-                    <Button Content="Select file" />
+                    <Button Name="btnSelectFiles" Content="Select file" Click="btnSelectFiles_Click" />
                 </Border>
                 <Border>
-                    <Button Content="Delete" />
+                    <Button Name="btnDelete" Content="Delete" Click="btnDelete_Click" />
                 </Border>
                 <Border>
-                    <Button Content="Refresh" />
+                    <Button Name="btnRefresh" Content="Refresh" Click="btnRefresh_Click" />
                 </Border>
-                <Border>
+                <Border Background="Bisque">
                     <TextBlock Text="Mod File Applications" />
                 </Border>
                 <Border>
@@ -44,7 +45,7 @@
                 <Border>
                     <Button Content="Remove All" />
                 </Border>
-                <Border>
+                <Border Background="Bisque">
                     <TextBlock Text="GO" />
                 </Border>
                 <Border>
@@ -52,7 +53,7 @@
                 </Border>
             </StackPanel>
             <WrapPanel Grid.Row="1" Grid.Column="1">
-                <Border>
+                <Border Background="Bisque">
                     <TextBlock Text="Custom File" />
                 </Border>
                 <Border>
@@ -62,7 +63,7 @@
                     <Button Content="Add Custom File" />
                 </Border>
                 <Border>
-                    <DataGrid Width="778" />
+                    <DataGrid Name="dgList" AlternatingRowBackground="Bisque" SelectionUnit="FullRow" SelectionMode="Single" Width="778" />
                 </Border>
             </WrapPanel>
         </Grid>

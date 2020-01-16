@@ -1,6 +1,7 @@
 ﻿using rdrtwocontentmanager.Models;
 using System;
 using System.Drawing;
+using System.IO;
 
 namespace rdrtwocontentmanager.Helper
 {
@@ -117,6 +118,26 @@ namespace rdrtwocontentmanager.Helper
                     Console.WriteLine(ex.Message);
                 }
             }
+        }
+    }
+
+    public static class FileFolderHelper
+    {
+        public static bool IsChildFolder(string child, string parent)
+        {
+            bool retval = false;
+            //  detect if sub folder
+            //  get the sub folder name then assign to appropriate data property
+            if (new DirectoryInfo(child).Name.ToLower() != new DirectoryInfo(parent).Name.ToLower())
+            {
+                retval = true;
+            }
+            return retval;
+        }
+
+        public static string GetChildFolder(string child, string parent)
+        {
+            return (IsChildFolder(child, parent)) ? new DirectoryInfo(child).Name : string.Empty;
         }
     }
 }
