@@ -1,5 +1,6 @@
 ﻿using rdrtwocontentmanager.Helper;
 using rdrtwocontentmanager.Models;
+using System;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -100,6 +101,153 @@ namespace rdrtwocontentmanager.Views
                 using var db = new ModifierFileDbHelper();
                 db.Delete(SelectedMod);
                 LoadModFiles(dgList);
+            }
+            catch (System.Exception ex)
+            {
+                LogHelper.LogError(ex.Message);
+            }
+        }
+
+        private void btnApply_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                using var db = new ModifierFileDbHelper();
+                var modfiles = db.Get().FindAll(row => row.ModId.ToLower() == SelectedMod.Id.ToLower() && !string.IsNullOrWhiteSpace(row.SubFolder));
+                foreach (var item in modfiles)
+                {
+                    System.IO.Directory.CreateDirectory(System.IO.Path.Combine(SelectedTarget.Root, item.SubFolder));
+                    string _dir = System.IO.Path.Combine(SelectedTarget.Root, item.SubFolder);
+                    System.IO.File.Copy(item.Source, System.IO.Path.Combine(_dir, item.FileName), true);
+                    LogHelper.Log(string.Format("File {0} copied to destination: {1}", item.FileName, SelectedTarget.Root));
+                }
+                modfiles = db.Get().FindAll(row => row.ModId.ToLower() == SelectedMod.Id.ToLower() && string.IsNullOrWhiteSpace(row.SubFolder));
+                foreach (var item in modfiles)
+                {
+                    System.IO.File.Copy(item.Source, System.IO.Path.Combine(SelectedTarget.Root, item.FileName), true);
+                    LogHelper.Log(string.Format("File {0} copied to destination: {1}", item.FileName, SelectedTarget.Root));
+                }
+
+                System.Windows.MessageBox.Show(string.Format("Mod files copied to destination: {0}", SelectedTarget.Root));
+            }
+            catch (System.Exception ex)
+            {
+                LogHelper.LogError(ex.Message);
+            }
+        }
+
+        private void btnRemove_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                using var db = new ModifierFileDbHelper();
+                var modfiles = db.Get().FindAll(row => row.ModId.ToLower() == SelectedMod.Id.ToLower() && !string.IsNullOrWhiteSpace(row.SubFolder));
+                foreach (var item in modfiles)
+                {
+                    string _dir = System.IO.Path.Combine(SelectedTarget.Root, item.SubFolder);
+                    try
+                    {
+                        System.IO.File.Delete(System.IO.Path.Combine(_dir, item.FileName));
+                        LogHelper.Log(string.Format("File {0} deleted from destination: {1}", item.FileName, SelectedTarget.Root));
+                    }
+                    catch (Exception ex)
+                    {
+                        LogHelper.LogError(ex.Message);
+                    }
+                    try
+                    {
+                        if (!string.IsNullOrWhiteSpace(item.SubFolder)) System.IO.Directory.Delete(_dir, true);
+                        LogHelper.Log(string.Format("Subdirectory {0} deleted from destination: {1}", _dir, SelectedTarget.Root));
+                    }
+                    catch (Exception ex)
+                    {
+                        LogHelper.LogError(ex.Message);
+                    }
+                }
+                modfiles = db.Get().FindAll(row => row.ModId.ToLower() == SelectedMod.Id.ToLower() && string.IsNullOrWhiteSpace(row.SubFolder));
+                foreach (var item in modfiles)
+                {
+                    try
+                    {
+                        System.IO.File.Delete(System.IO.Path.Combine(SelectedTarget.Root, item.FileName));
+                        LogHelper.Log(string.Format("File {0} deleted from destination: {1}", item.FileName, SelectedTarget.Root));
+                    }
+                    catch (Exception ex)
+                    {
+                        LogHelper.LogError(ex.Message);
+                    }
+                }
+
+                System.Windows.MessageBox.Show(string.Format("Mod files removed from destination: {0}", SelectedTarget.Root));
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(ex.Message);
+            }
+        }
+
+        private void btnRemoveAll_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                using var db = new ModifierFileDbHelper();
+                var modfiles = db.Get().FindAll(row => !string.IsNullOrWhiteSpace(row.SubFolder));
+                foreach (var item in modfiles)
+                {
+                    string _dir = System.IO.Path.Combine(SelectedTarget.Root, item.SubFolder);
+                    try
+                    {
+                        System.IO.File.Delete(System.IO.Path.Combine(_dir, item.FileName));
+                        LogHelper.Log(string.Format("File {0} deleted from destination: {1}", item.FileName, SelectedTarget.Root));
+                    }
+                    catch (Exception ex)
+                    {
+                        LogHelper.LogError(ex.Message);
+                    }
+                    try
+                    {
+                        if (!string.IsNullOrWhiteSpace(item.SubFolder)) System.IO.Directory.Delete(_dir, true);
+                        LogHelper.Log(string.Format("Subdirectory {0} deleted from destination: {1}", _dir, SelectedTarget.Root));
+                    }
+                    catch (Exception ex)
+                    {
+                        LogHelper.LogError(ex.Message);
+                    }
+                }
+                modfiles = db.Get().FindAll(row => string.IsNullOrWhiteSpace(row.SubFolder));
+                foreach (var item in modfiles)
+                {
+                    try
+                    {
+                        System.IO.File.Delete(System.IO.Path.Combine(SelectedTarget.Root, item.FileName));
+                        LogHelper.Log(string.Format("File {0} deleted from destination: {1}", item.FileName, SelectedTarget.Root));
+                    }
+                    catch (Exception ex)
+                    {
+                        LogHelper.LogError(ex.Message);
+                    }
+                }
+
+                System.Windows.MessageBox.Show(string.Format("Mod files removed from destination: {0}", SelectedTarget.Root));
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(ex.Message);
+            }
+        }
+
+        private void btnAcf_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(SelectedTarget.Root)) throw new Exception("MOD file destination should not be empty!");
+                if (string.IsNullOrWhiteSpace(tbCustomFile.Text)) throw new Exception("MOD custom file should not be empty!");
+                using var db = new ModifierFileDbHelper();
+                db.Post(new ModifierFile() { 
+                    ModId = SelectedMod.Id, 
+                    Source = System.IO.Path.Combine(SelectedMod.Source, tbCustomFile.Text), 
+                    FileName = tbCustomFile.Text
+                });
             }
             catch (System.Exception ex)
             {

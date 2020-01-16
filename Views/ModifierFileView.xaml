@@ -37,13 +37,13 @@
                     <TextBlock Text="Mod File Applications" />
                 </Border>
                 <Border>
-                    <Button Content="Apply" />
+                    <Button Name="btnApply" Content="Apply" Click="btnApply_Click" />
                 </Border>
                 <Border>
-                    <Button Content="Remove" />
+                    <Button Name="btnRemove" Content="Remove" Click="btnRemove_Click" />
                 </Border>
                 <Border>
-                    <Button Content="Remove All" />
+                    <Button Name="btnRemoveAll" Content="Remove All" Click="btnRemoveAll_Click" />
                 </Border>
                 <Border Background="Bisque">
                     <TextBlock Text="GO" />
@@ -57,10 +57,10 @@
                     <TextBlock Text="Custom File" />
                 </Border>
                 <Border>
-                    <TextBox Width="624" />
+                    <TextBox Name="tbCustomFile" Width="624" />
                 </Border>
                 <Border>
-                    <Button Content="Add Custom File" />
+                    <Button Name="btnAcf" Content="Add Custom File" Click="btnAcf_Click" />
                 </Border>
                 <Border>
                     <DataGrid Name="dgList" AlternatingRowBackground="Bisque" SelectionUnit="FullRow" SelectionMode="Single" Width="778" />
