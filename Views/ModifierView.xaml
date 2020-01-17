@@ -45,46 +45,47 @@
                     <Button Name="btnModFiles" Content="forw" Width="65" Click="btnModFiles_Click" />
                 </Border>
             </WrapPanel>
-            <WrapPanel
-                Grid.Row="1" 
-                Grid.Column="1">
-                <Border Width="850" Height="30" Background="Lavender" >
-                    <TextBlock Text="Data Entry Block" HorizontalAlignment="Center" />
-                </Border>
-                <Border Width="100" Height="30">
-                    <TextBlock Text="Source:" Background="Aquamarine" />
-                </Border>
-                <Border Width="720" >
-                    <TextBox Name="tbSource" />
-                </Border>
-                <Border Width="30">
-                    <Button Name="btnFolderSelect" Content="..." Click="btnFolderSelect_Click" />
-                </Border>
-                <Border Width="100" Height="30">
-                    <TextBlock Text="Name:" Background="Aquamarine" />
-                </Border>
-                <Border Width="720" >
-                    <TextBox Name="tbName" />
-                </Border>
-                <Border Width="100" Height="30">
-                    <TextBlock Text="Version:" Background="Aquamarine" />
-                </Border>
-                <Border Width="400" >
-                    <TextBox Name="blVersion" />
-                </Border>
-                <Border Width="100" >
-                    <TextBlock Text="Release Date:" Background="Aquamarine" />
-                </Border>
-                <Border Width="220" Background="White">
-                    <DatePicker Name="dpReleaseDate" />
-                </Border>
-                <Border Width="850" Height="30" Background="Lavender">
-                    <TextBlock HorizontalAlignment="Center" Text="List Of Current Mods" />
-                </Border>
-                <Border Width="850">
-                    <DataGrid Name="dgList" SelectionUnit="FullRow" SelectionMode="Single" AlternatingRowBackground="Coral" SelectionChanged="dgList_SelectionChanged" />
-                </Border>
-            </WrapPanel>
+            <Border BorderBrush="BlueViolet"  BorderThickness="1" Grid.Row="1" Grid.Column="1">
+                <WrapPanel>
+                    <Border Width="850" Height="30" Background="Lavender" >
+                        <TextBlock Text="Data Entry Block" HorizontalAlignment="Center" />
+                    </Border>
+                    <Border Width="100" Height="30">
+                        <TextBlock Text="Source:" Background="Aquamarine" />
+                    </Border>
+                    <Border Width="718" >
+                        <TextBox Name="tbSource" />
+                    </Border>
+                    <Border Width="30">
+                        <Button Name="btnFolderSelect" Content="..." Click="btnFolderSelect_Click" />
+                    </Border>
+                    <Border Width="100" Height="30">
+                        <TextBlock Text="Name:" Background="Aquamarine" />
+                    </Border>
+                    <Border Width="748" >
+                        <TextBox Name="tbName" />
+                    </Border>
+                    <Border Width="100" Height="30">
+                        <TextBlock Text="Version:" Background="Aquamarine" />
+                    </Border>
+                    <Border Width="400" >
+                        <TextBox Name="blVersion" />
+                    </Border>
+                    <Border Width="100" >
+                        <TextBlock Text="Release Date:" Background="Aquamarine" />
+                    </Border>
+                    <Border Width="248" Background="White">
+                        <DatePicker Name="dpReleaseDate" />
+                    </Border>
+                    <Border Width="850" Height="30" Background="Lavender">
+                        <TextBlock HorizontalAlignment="Center" Text="List Of Current Mods" />
+                    </Border>
+                    <Border Width="850">
+                        <DataGrid Name="dgList" SelectionUnit="FullRow" SelectionMode="Single" AlternatingRowBackground="Coral" SelectionChanged="dgList_SelectionChanged" />
+                    </Border>
+                </WrapPanel>
+            </Border>
+
         </Grid>
     </Border>
 </UserControl>

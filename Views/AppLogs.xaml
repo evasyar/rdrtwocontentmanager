@@ -16,10 +16,10 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <WrapPanel Grid.Row="0" Grid.Column="0">
-                <Border Width="100" Padding="0 0 5 0">
+                <Border Width="100" Height="30" Padding="0 0 0 0">
                     <TextBlock Text="List of all Logs:" />
                 </Border>
-                <Border Width="848" Padding="0 0 5 0">
+                <Border Width="848" Padding="0 0 0 0">
                     <TextBox Name="tbSearch" TextChanged="tbSearch_TextChanged" />
                 </Border>
                 <Border Width="30" Padding="0 0 0 0">
@@ -29,13 +29,13 @@
             <DataGrid 
                 Grid.Row="1" 
                 Grid.Column="0" 
-                Margin="0 0 0 0" 
+                Width="980" Height="Auto" 
                 Name="dgAppLogs" 
                 IsReadOnly="True" 
                 SelectionUnit="FullRow"
                 KeyUp="dgAppLogs_KeyUp" 
                 Loaded="dgAppLogs_Loaded" 
-                AlternatingRowBackground="AliceBlue" 
+                AlternatingRowBackground="Aquamarine" 
                 SelectionChanged="dgAppLogs_SelectionChanged">
 
             </DataGrid>

@@ -56,11 +56,11 @@
                     <Border Padding="0 0 0 0">
                         <Button Name="bFileSelect" Content="..." Width="30" Click="bFileSelect_Click" />
                     </Border>
-                    <Border Padding="0 0 0 0">
-                        <TextBlock Text="Mod Target Name:" Background="Coral" Width="153" />
+                    <Border Padding="0 0 0 0" Width="153" Height="30">
+                        <TextBlock Text="Mod Target Name:" Background="Coral" />
                     </Border>
-                    <Border Padding="0 0 0 0" HorizontalAlignment="Left">
-                        <TextBox Name="tbModTargetName" Width="546" Height="30" />
+                    <Border Padding="0 0 0 0" HorizontalAlignment="Left" Width="576">
+                        <TextBox Name="tbModTargetName" />
                     </Border>
                     <Border Padding="0 0 0 0" Width="730" Height="30" Background="Lavender">
                         <TextBlock Text="List of Mod Targets:" HorizontalAlignment="Center" />

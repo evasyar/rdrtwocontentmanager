@@ -52,26 +52,29 @@
                     <Button Name="btnBack" Content="back" Click="btnBack_Click" />
                 </Border>
             </StackPanel>
-            <WrapPanel Grid.Row="1" Grid.Column="1">
-                <Border Background="Lavender"  Height="30" Width="780">
-                    <TextBlock Text="Data Entry Group" HorizontalAlignment="Center" />
-                </Border>
-                <Border Background="Bisque" Height="30" Width="100">
-                    <TextBlock Text="Custom File" />
-                </Border>
-                <Border>
-                    <TextBox Name="tbCustomFile" Width="588" />
-                </Border>
-                <Border>
-                    <Button Name="btnAcf" Content="Add Custom File" Click="btnAcf_Click" />
-                </Border>
-                <Border Background="Lavender" Height="30" Width="780">
-                    <TextBlock Text="List Of Modifier Files" HorizontalAlignment="Center" />
-                </Border>
-                <Border>
-                    <DataGrid Name="dgList" AlternatingRowBackground="Bisque" SelectionUnit="FullRow" SelectionMode="Single" Width="780" />
-                </Border>
-            </WrapPanel>
+            <Border BorderBrush="BlueViolet"  BorderThickness="1" Grid.Row="1" Grid.Column="1">
+                <WrapPanel>
+                    <Border Background="Lavender"  Height="30" Width="780">
+                        <TextBlock Text="Data Entry Group" HorizontalAlignment="Center" />
+                    </Border>
+                    <Border Background="Bisque" Height="30" Width="100">
+                        <TextBlock Text="Custom File" />
+                    </Border>
+                    <Border Width="586">
+                        <TextBox Name="tbCustomFile" Width="588" />
+                    </Border>
+                    <Border>
+                        <Button Name="btnAcf" Content="Add Custom File" Click="btnAcf_Click" />
+                    </Border>
+                    <Border Background="Lavender" Height="30" Width="780">
+                        <TextBlock Text="List Of Modifier Files" HorizontalAlignment="Center" />
+                    </Border>
+                    <Border>
+                        <DataGrid Name="dgList" AlternatingRowBackground="Bisque" SelectionUnit="FullRow" SelectionMode="Single" Width="780" />
+                    </Border>
+                </WrapPanel>
+            </Border>
+
         </Grid>
     </Border>
 </UserControl>

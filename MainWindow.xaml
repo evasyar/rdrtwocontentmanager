@@ -6,52 +6,36 @@
         xmlns:local="clr-namespace:rdrtwocontentmanager"
         mc:Ignorable="d"
         Title="Mods Manager: " Width="1024">
-    <Border Padding="10">
-        <StackPanel>
-            <ScrollViewer 
-                MaxHeight="700" 
-                CanContentScroll="True" 
-                HorizontalScrollBarVisibility="Auto" 
-                VerticalScrollBarVisibility="Auto">
-                
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <Border Grid.Row="1" Grid.Column="0" Padding="0 5 5 0">
-                        <Button Name="BModTargetLauncher" Content="Start" Click="BModTargetLauncher_Click" />
-                    </Border>
-                    <Border Grid.Row="1" Grid.Column="1" Padding="0 5 5 0">
-                        <Button Name="BLogsLauncher" Content="Logs" Click="BLogsLauncher_Click" />
-                    </Border>
-                    <Border Grid.Row="1" Grid.Column="2" Padding="0 5 5 0">
-                        <Button Name="BTargetDbLauncher" Content="Target DB" Click="BTargetDbLauncher_Click" />
-                    </Border>
-                    <Border Grid.Row="1" Grid.Column="3" Padding="0 5 5 0">
-                        <Button Grid.Column="3" Grid.Row="1" Content="Mods DB" />
-                    </Border>
-                    <Border Grid.Column="4" Grid.Row="1" Padding="0 5 0 0">
-                        <Button Content="Mod Files DB" />
-                    </Border>
-                    <Image Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" />
-                    <ContentControl 
-                        Grid.Column="0" 
-                        Grid.Row="2" 
-                        Grid.ColumnSpan="5" 
-                        Name="ccMainContentContainer" 
-                        Margin="0,5,0,0"/>
-                </Grid>
-            </ScrollViewer>
-        </StackPanel>
-    </Border>
-    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1024"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <WrapPanel Grid.Row="0" Grid.Column="0">
+            <Border Padding="0 0 0 0" Width="204">
+                <Button Name="BModTargetLauncher" Content="Start" Click="BModTargetLauncher_Click" />
+            </Border>
+            <Border Padding="0 0 0 0" Width="204">
+                <Button Name="BLogsLauncher" Content="Logs" Click="BLogsLauncher_Click" />
+            </Border>
+            <Border Padding="0 0 0 0" Width="204">
+                <Button Name="BTargetDbLauncher" Content="Target DB" Click="BTargetDbLauncher_Click" />
+            </Border>
+            <Border Padding="0 0 0 0" Width="204">
+                <Button Grid.Column="3" Grid.Row="1" Content="Mods DB" />
+            </Border>
+            <Border Padding="0 0 0 0" Width="204">
+                <Button Content="Mod Files DB" />
+            </Border>
+            <Border Width="1024">
+                <Image />
+            </Border>
+        </WrapPanel>
+        <ScrollViewer Grid.Row="1" Grid.Column="0" Width="1024" BorderBrush="Aquamarine" BorderThickness="0.5" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <ContentControl Name="ccMainContentContainer" />
+        </ScrollViewer>
+    </Grid>
 </Window>
