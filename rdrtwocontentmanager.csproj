@@ -6,6 +6,8 @@
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationIcon />
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <StartupObject>rssmodmngr.App</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
