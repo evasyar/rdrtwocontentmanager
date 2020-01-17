@@ -211,5 +211,10 @@ namespace rdrtwocontentmanager.Views
                 LogHelper.LogError(ex.Message);
             }
         }
+
+        private void btnInspectTarget_Click(object sender, RoutedEventArgs e)
+        {
+            FileInspectorHelper.StartProcess(SelectedTarget.Root);
+        }
     }
 }

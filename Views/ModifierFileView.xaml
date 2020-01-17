@@ -51,7 +51,12 @@
                 <Border Height="30">
                     <Button Name="btnRemoveAll" Content="Remove All" Click="btnRemoveAll_Click" />
                 </Border>
-
+                <Border Background="Bisque" Height="30">
+                    <TextBlock Text="Inspect" />
+                </Border>
+                <Border Height="30">
+                    <Button Name="btnInspectTarget" Content="Target Folder" Click="btnInspectTarget_Click" />
+                </Border>
             </StackPanel>
             <Border BorderBrush="BlueViolet"  BorderThickness="1" Grid.Row="1" Grid.Column="1">
                 <WrapPanel>

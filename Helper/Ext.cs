@@ -1,5 +1,6 @@
 ﻿using rdrtwocontentmanager.Models;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 
@@ -190,6 +191,24 @@ namespace rdrtwocontentmanager.Helper
             catch (Exception ex)
             {
                 LogHelper.LogError(ex.Message);
+            }
+        }
+    }
+
+    public static class FileInspectorHelper
+    {
+        public static void StartProcess(string path)
+        {
+            try
+            {
+                ProcessStartInfo StartInformation = new ProcessStartInfo();
+                StartInformation.FileName = path;
+                Process process = Process.Start(Environment.GetEnvironmentVariable("WINDIR") + @"\explorer.exe", StartInformation.FileName);
+                process.EnableRaisingEvents = true;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(string.Format(@"FileInspector -> StartProcess method: {0}", ex.Message));
             }
         }
     }
