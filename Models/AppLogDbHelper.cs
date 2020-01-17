@@ -19,7 +19,10 @@ namespace rdrtwocontentmanager.Models
             {
                 using (var db = new LiteDatabase(@"Rdr2ModsDB"))
                 {
-                    retval = db.GetCollection<AppLog>("logs").FindAll().OrderByDescending(row => row.creationDate).ToList();
+                    retval = db.GetCollection<AppLog>("logs").FindAll()
+                        .OrderByDescending(row => row.creationDate)
+                        .Take(100)
+                        .ToList();
                 }
             }
             catch (Exception ex)
@@ -43,6 +46,7 @@ namespace rdrtwocontentmanager.Models
                     || e.modifiedBy.ToLower().Contains(keyword.ToLower())
                     || e.creationDate.ToShortDateString().Contains(keyword)
                     || e.modifiedDate.ToShortDateString().Contains(keyword))
+                .Take(100)
                 .ToList();
         }
 
