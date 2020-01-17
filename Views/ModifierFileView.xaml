@@ -22,6 +22,12 @@
             </Border>
             <StackPanel Grid.Row="1" Grid.Column="0" >
                 <Border Background="Bisque" Height="30">
+                    <TextBlock Text="GO" />
+                </Border>
+                <Border Height="30">
+                    <Button Name="btnBack" Content="back" Click="btnBack_Click" />
+                </Border>
+                <Border Background="Bisque" Height="30">
                     <TextBlock Text="File Map" />
                 </Border>
                 <Border Height="30">
@@ -45,12 +51,7 @@
                 <Border Height="30">
                     <Button Name="btnRemoveAll" Content="Remove All" Click="btnRemoveAll_Click" />
                 </Border>
-                <Border Background="Bisque" Height="30">
-                    <TextBlock Text="GO" />
-                </Border>
-                <Border Height="30">
-                    <Button Name="btnBack" Content="back" Click="btnBack_Click" />
-                </Border>
+
             </StackPanel>
             <Border BorderBrush="BlueViolet"  BorderThickness="1" Grid.Row="1" Grid.Column="1">
                 <WrapPanel>

@@ -24,6 +24,15 @@
             </Border>
             <WrapPanel Grid.Row="1" Grid.Column="0">
                 <Border Height="30">
+                    <TextBlock Width="128" HorizontalAlignment="Left" Text="Go:" Background="Aquamarine" />
+                </Border>
+                <Border Height="30">
+                    <Button Name="btnModTarget" Content="back" Width="65" Click="btnModTarget_Click" />
+                </Border>
+                <Border Height="30">
+                    <Button Name="btnModFiles" Content="forw" Width="65" Click="btnModFiles_Click" />
+                </Border>
+                <Border Height="30">
                     <TextBlock Text="Modifier Updates:" Background="Aquamarine" Width="128" />
                 </Border>
                 <Border Height="30">
@@ -34,15 +43,6 @@
                 </Border>
                 <Border Height="30">
                     <Button Name="btnRefresh" Content="Refresh" Width="128" Click="btnRefresh_Click" />
-                </Border>
-                <Border Height="30">
-                    <TextBlock Width="128" HorizontalAlignment="Left" Text="Go:" Background="Aquamarine" />
-                </Border>
-                <Border Height="30">
-                    <Button Name="btnModTarget" Content="back" Width="65" Click="btnModTarget_Click" />
-                </Border>
-                <Border Height="30">
-                    <Button Name="btnModFiles" Content="forw" Width="65" Click="btnModFiles_Click" />
                 </Border>
             </WrapPanel>
             <Border BorderBrush="BlueViolet"  BorderThickness="1" Grid.Row="1" Grid.Column="1">
