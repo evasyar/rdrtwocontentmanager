@@ -85,6 +85,8 @@ namespace rdrtwocontentmanager.Views
             using TargetDbHelper tdb = new TargetDbHelper();
             try
             {
+                //  before deleting mods make sure no mods applied to target first!
+                ModFileFolderHelper.RemoveAllMods(SelectedTarget);
                 tdb.Delete(SelectedTarget);
                 dgTarget.ItemsSource = tdb.Get();
                 LogHelper.Log(string.Format(@"Target {0} removed from DB and list is updated", SelectedTarget.RootName));

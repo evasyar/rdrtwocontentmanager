@@ -35,6 +35,7 @@
                 SelectionUnit="FullRow"
                 KeyUp="dgAppLogs_KeyUp" 
                 Loaded="dgAppLogs_Loaded" 
+                AlternatingRowBackground="AliceBlue" 
                 SelectionChanged="dgAppLogs_SelectionChanged">
 
             </DataGrid>

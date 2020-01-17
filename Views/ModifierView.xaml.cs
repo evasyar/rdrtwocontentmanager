@@ -72,6 +72,8 @@ namespace rdrtwocontentmanager.Views
         {
             try
             {
+                //  before deleting mods make sure no mods are applied!
+                ModFileFolderHelper.RemoveAllMods(CapTarget);
                 using var mdb = new ModifierDbHelper();
                 mdb.Delete(CapTarget);
                 RefreshList(CapTarget);

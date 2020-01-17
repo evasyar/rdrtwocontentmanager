@@ -98,6 +98,8 @@ namespace rdrtwocontentmanager.Views
         {
             try
             {
+                //  before deleting mods make sure mods not applied to target!
+                ModFileFolderHelper.RemoveAllMods(SelectedTarget);
                 using var db = new ModifierFileDbHelper();
                 db.Delete(SelectedMod);
                 LoadModFiles(dgList);
@@ -188,52 +190,7 @@ namespace rdrtwocontentmanager.Views
 
         private void btnRemoveAll_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                using var db = new ModifierFileDbHelper();
-                var modfiles = db.Get().FindAll(row => !string.IsNullOrWhiteSpace(row.SubFolder));
-                foreach (var item in modfiles)
-                {
-                    string _dir = System.IO.Path.Combine(SelectedTarget.Root, item.SubFolder);
-                    try
-                    {
-                        System.IO.File.Delete(System.IO.Path.Combine(_dir, item.FileName));
-                        LogHelper.Log(string.Format("File {0} deleted from destination: {1}", item.FileName, SelectedTarget.Root));
-                    }
-                    catch (Exception ex)
-                    {
-                        LogHelper.LogError(ex.Message);
-                    }
-                    try
-                    {
-                        if (!string.IsNullOrWhiteSpace(item.SubFolder)) System.IO.Directory.Delete(_dir, true);
-                        LogHelper.Log(string.Format("Subdirectory {0} deleted from destination: {1}", _dir, SelectedTarget.Root));
-                    }
-                    catch (Exception ex)
-                    {
-                        LogHelper.LogError(ex.Message);
-                    }
-                }
-                modfiles = db.Get().FindAll(row => string.IsNullOrWhiteSpace(row.SubFolder));
-                foreach (var item in modfiles)
-                {
-                    try
-                    {
-                        System.IO.File.Delete(System.IO.Path.Combine(SelectedTarget.Root, item.FileName));
-                        LogHelper.Log(string.Format("File {0} deleted from destination: {1}", item.FileName, SelectedTarget.Root));
-                    }
-                    catch (Exception ex)
-                    {
-                        LogHelper.LogError(ex.Message);
-                    }
-                }
-
-                System.Windows.MessageBox.Show(string.Format("Mod files removed from destination: {0}", SelectedTarget.Root));
-            }
-            catch (Exception ex)
-            {
-                LogHelper.LogError(ex.Message);
-            }
+            ModFileFolderHelper.RemoveAllMods(SelectedTarget);
         }
 
         private void btnAcf_Click(object sender, RoutedEventArgs e)

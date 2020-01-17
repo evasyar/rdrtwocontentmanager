@@ -140,4 +140,57 @@ namespace rdrtwocontentmanager.Helper
             return (IsChildFolder(child, parent)) ? new DirectoryInfo(child).Name : string.Empty;
         }
     }
+
+    public static class ModFileFolderHelper
+    {
+        public static void RemoveAllMods(Target target)
+        {
+            try
+            {
+                using var db = new ModifierFileDbHelper();
+                var modfiles = db.Get().FindAll(row => !string.IsNullOrWhiteSpace(row.SubFolder));
+                foreach (var item in modfiles)
+                {
+                    string _dir = System.IO.Path.Combine(target.Root, item.SubFolder);
+                    try
+                    {
+                        System.IO.File.Delete(System.IO.Path.Combine(_dir, item.FileName));
+                        LogHelper.Log(string.Format("File {0} deleted from destination: {1}", item.FileName, target.Root));
+                    }
+                    catch (Exception ex)
+                    {
+                        LogHelper.LogError(ex.Message);
+                    }
+                    try
+                    {
+                        if (!string.IsNullOrWhiteSpace(item.SubFolder)) System.IO.Directory.Delete(_dir, true);
+                        LogHelper.Log(string.Format("Subdirectory {0} deleted from destination: {1}", _dir, target.Root));
+                    }
+                    catch (Exception ex)
+                    {
+                        LogHelper.LogError(ex.Message);
+                    }
+                }
+                modfiles = db.Get().FindAll(row => string.IsNullOrWhiteSpace(row.SubFolder));
+                foreach (var item in modfiles)
+                {
+                    try
+                    {
+                        System.IO.File.Delete(System.IO.Path.Combine(target.Root, item.FileName));
+                        LogHelper.Log(string.Format("File {0} deleted from destination: {1}", item.FileName, target.Root));
+                    }
+                    catch (Exception ex)
+                    {
+                        LogHelper.LogError(ex.Message);
+                    }
+                }
+
+                System.Windows.MessageBox.Show(string.Format("Mod files removed from destination: {0}", target.Root));
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(ex.Message);
+            }
+        }
+    }
 }
