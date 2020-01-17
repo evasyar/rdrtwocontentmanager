@@ -34,7 +34,18 @@
                 <Image />
             </Border>
         </WrapPanel>
-        <ScrollViewer Grid.Row="1" Grid.Column="0" Width="1024" BorderBrush="Aquamarine" BorderThickness="0.5" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <ScrollViewer 
+            Grid.Row="1" 
+            Grid.Column="0" 
+            VerticalAlignment="Top" 
+            VerticalContentAlignment="Stretch" 
+            HorizontalAlignment="Left" 
+            HorizontalContentAlignment="Left" 
+            Width="1010" 
+            BorderBrush="Aquamarine" 
+            BorderThickness="0.5" 
+            VerticalScrollBarVisibility="Auto" 
+            HorizontalScrollBarVisibility="Auto">
             <ContentControl Name="ccMainContentContainer" />
         </ScrollViewer>
     </Grid>
