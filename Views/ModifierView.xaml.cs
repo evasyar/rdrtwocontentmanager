@@ -55,7 +55,7 @@ namespace rdrtwocontentmanager.Views
                 mdb.Post(new Modifier() { 
                     TargetId = CapTarget.Id, 
                     Name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(tbName.Text), 
-                    ModifierVersion = tbVersion.Text, 
+                    ModifierVersion = blVersion.Text, 
                     Source = tbSource.Text, 
                     ReleaseDate = Convert.ToDateTime(dpReleaseDate.SelectedDate)
                 });

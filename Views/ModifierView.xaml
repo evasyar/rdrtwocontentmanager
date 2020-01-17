@@ -7,10 +7,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="980" Width="980">
     <Border BorderBrush="Aquamarine" BorderThickness="1">
-        <Grid>
+        <Grid Background="LightSteelBlue">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="130"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="850"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
@@ -22,65 +22,67 @@
                 Padding="820 0 0 2" >
                 <Button Name="btnExit" Content="X" Click="btnExit_Click" />
             </Border>
-            <WrapPanel Grid.Row="1" Grid.Column="0" Width="130" Margin="0 0 0 0">
-                <Border Width="130">
+            <WrapPanel Grid.Row="1" Grid.Column="0">
+                <Border Height="30">
                     <TextBlock Text="Modifier Updates:" Background="Aquamarine" Width="128" />
                 </Border>
-                <Border Width="130">
+                <Border Height="30">
                     <Button Name="btnPost" Content="Post" Width="128" Click="btnPost_Click" />
                 </Border>
-                <Border Width="130">
+                <Border Height="30">
                     <Button Name="btnDelete" Content="Delete" Width="128" Click="btnDelete_Click" />
                 </Border>
-                <Border Width="130">
+                <Border Height="30">
                     <Button Name="btnRefresh" Content="Refresh" Width="128" Click="btnRefresh_Click" />
                 </Border>
-                <Border Width="130">
+                <Border Height="30">
                     <TextBlock Width="128" HorizontalAlignment="Left" Text="Go:" Background="Aquamarine" />
                 </Border>
-                <Border Width="65">
+                <Border Height="30">
                     <Button Name="btnModTarget" Content="back" Width="65" Click="btnModTarget_Click" />
                 </Border>
-                <Border Width="65">
+                <Border Height="30">
                     <Button Name="btnModFiles" Content="forw" Width="65" Click="btnModFiles_Click" />
                 </Border>
             </WrapPanel>
             <WrapPanel
                 Grid.Row="1" 
-                Grid.Column="1" 
-                Width="850">
-                <Border Width="850" Padding="5 0 0 5" Background="Aquamarine">
-                    <TextBlock HorizontalAlignment="Center" Text="List Of Current Mods" />
+                Grid.Column="1">
+                <Border Width="850" Height="30" Background="Lavender" >
+                    <TextBlock Text="Data Entry Block" HorizontalAlignment="Center" />
                 </Border>
-                <Border Width="850" Padding="5 0 0 5">
-                    <DataGrid Name="dgList" SelectionUnit="FullRow" SelectionMode="Single" AlternatingRowBackground="Coral" SelectionChanged="dgList_SelectionChanged" />
-                </Border>
-                <Border Width="100" Padding="5 0 5 0">
+                <Border Width="100" Height="30">
                     <TextBlock Text="Source:" Background="Aquamarine" />
                 </Border>
-                <Border Width="720" Padding="0 0 5 0">
+                <Border Width="720" >
                     <TextBox Name="tbSource" />
                 </Border>
                 <Border Width="30">
                     <Button Name="btnFolderSelect" Content="..." Click="btnFolderSelect_Click" />
                 </Border>
-                <Border Width="100" Padding="5 2 5 0">
+                <Border Width="100" Height="30">
                     <TextBlock Text="Name:" Background="Aquamarine" />
                 </Border>
-                <Border Width="720" Padding="0 2 5 0">
+                <Border Width="720" >
                     <TextBox Name="tbName" />
                 </Border>
-                <Border Width="100" Padding="5 2 5 0">
+                <Border Width="100" Height="30">
                     <TextBlock Text="Version:" Background="Aquamarine" />
                 </Border>
-                <Border Width="400" Padding="0 2 5 0">
-                    <TextBox Name="tbVersion" />
+                <Border Width="400" >
+                    <TextBox Name="blVersion" />
                 </Border>
-                <Border Width="100" Padding="5 2 5 0">
+                <Border Width="100" >
                     <TextBlock Text="Release Date:" Background="Aquamarine" />
                 </Border>
-                <Border Width="220" Padding="0 2 5 0">
+                <Border Width="220" Background="White">
                     <DatePicker Name="dpReleaseDate" />
+                </Border>
+                <Border Width="850" Height="30" Background="Lavender">
+                    <TextBlock HorizontalAlignment="Center" Text="List Of Current Mods" />
+                </Border>
+                <Border Width="850">
+                    <DataGrid Name="dgList" SelectionUnit="FullRow" SelectionMode="Single" AlternatingRowBackground="Coral" SelectionChanged="dgList_SelectionChanged" />
                 </Border>
             </WrapPanel>
         </Grid>

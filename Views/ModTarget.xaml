@@ -6,68 +6,73 @@
              xmlns:local="clr-namespace:rdrtwocontentmanager.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="980" Width="980">
-    <Border BorderBrush="Aquamarine" BorderThickness="1">
-        <Grid>
+    <Border BorderBrush="BlanchedAlmond"  BorderThickness="1">
+        <Grid Background="Beige">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="730"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
-            <Border Grid.Row="0" Grid.Column="0" Padding="950 0 0 0">
+            <Border Grid.Row="0" Grid.Column="2" Padding="700 0 0 0">
                 <Button Content="X" Name="bExit" Click="bExit_Click"/>
             </Border>
-            <Border Grid.Row="1" Grid.Column="0" Padding="0 5 500 5">
-                <TextBlock Text="Database Update Controls:  " />
-            </Border>
-            <StackPanel Grid.Row="2" Orientation="Horizontal">
-                <Border Padding="0 5 10 5">
-                    <Button Content="Post" Width="100" Name="bPost" Click="bPost_Click" />
+            <StackPanel Grid.Row="1" Grid.Column="0">
+                <Border Background="Coral" Height="30">
+                    <TextBlock Text="Controls Group" HorizontalAlignment="Center" />
                 </Border>
-                <Border Padding="0 5 10 5">
-                    <Button Content="Delete" Width="100" Name="bDelete" Click="bDelete_Click" />
+                <Border Background="Coral" Height="30">
+                    <TextBlock Text="Go" />
                 </Border>
-                <Border Padding="0 5 10 5">
-                    <Button Content="Refresh" Width="100" Name="bRefresh" />
+                <Border Padding="0 0 0 0" Height="30">
+                    <Button Content="Mods" Name="bModSources" Click="bModSources_Click" />
                 </Border>
-                <Border Padding="0 5 0 5">
-                    <Button Content="Mods" Width="100" Name="bModSources" Click="bModSources_Click" />
+                <Border Padding="0 0 0 0" Height="30" Background="Coral">
+                    <TextBlock Text="Database Update Controls:  " />
                 </Border>
-            </StackPanel>
-            <Border Grid.Row="3" Grid.Column="0" Padding="0 5 500 5">
-                <TextBlock Text="List of Mod Targets:  " />
-            </Border>
-            <DataGrid 
-                Grid.Row="4" Grid.Column="0" 
-                Padding="0 5 0 5"
-                Name="dgTarget" 
-                IsReadOnly="True" 
-                HorizontalAlignment="Left" 
-                SelectionUnit="FullRow" Loaded="dgTarget_Loaded" SelectionChanged="dgTarget_SelectionChanged" />
-            <Border Grid.Row="5" Grid.Column="0" Padding="0 5 400 5">
-                <TextBlock Text="File Location To Apply Mod:  " />
-            </Border>
-            <StackPanel Grid.Row="6" Grid.Column="0" Orientation="Horizontal">
-                <Border Padding="0 0 10 0">
-                    <TextBox Name="tbFileLocation" Width="938" />
+                <Border Padding="0 0 0 0" Height="30">
+                    <Button Content="Post" Name="btnPost" Click="btnPost_Click" />
                 </Border>
-                <Border Padding="0 0 0 0">
-                    <Button Name="bFileSelect" Content="..." Width="30" Click="bFileSelect_Click" />
+                <Border Padding="0 0 0 0" Height="30">
+                    <Button Content="Delete" Name="bDelete" Click="bDelete_Click" />
+                </Border>
+                <Border Padding="0 0 0 0" Height="30">
+                    <Button Content="Refresh" Name="bRefresh" />
                 </Border>
             </StackPanel>
-            <Border Grid.Row="7" Grid.Column="0" Padding="0 5 500 5">
-                <TextBlock Text="Mod Target Name:  " />
-            </Border>
-            <Border Grid.Row="8" Grid.Column="0" Padding="0 0 0 0" HorizontalAlignment="Left">
-                <TextBox Name="tbModTargetName" Width="938" />
+            <Border Grid.Row="1" Grid.Column="1" BorderThickness="0.5" BorderBrush="Black">
+                <WrapPanel>
+                    <Border Padding="0 0 0 0" Background="Lavender" Width="730" Height="30">
+                        <TextBlock Text="Data Entry Group" HorizontalAlignment="Center" />
+                    </Border>
+                    <Border Padding="0 0 0 0" Background="Coral">
+                        <TextBlock Text="File Location To Apply Mod:" Width="153" />
+                    </Border>
+                    <Border Padding="0 0 0 0">
+                        <TextBox Name="tbFileLocation" Width="546" Height="30" />
+                    </Border>
+                    <Border Padding="0 0 0 0">
+                        <Button Name="bFileSelect" Content="..." Width="30" Click="bFileSelect_Click" />
+                    </Border>
+                    <Border Padding="0 0 0 0">
+                        <TextBlock Text="Mod Target Name:" Background="Coral" Width="153" />
+                    </Border>
+                    <Border Padding="0 0 0 0" HorizontalAlignment="Left">
+                        <TextBox Name="tbModTargetName" Width="546" Height="30" />
+                    </Border>
+                    <Border Padding="0 0 0 0" Width="730" Height="30" Background="Lavender">
+                        <TextBlock Text="List of Mod Targets:" HorizontalAlignment="Center" />
+                    </Border>
+                    <DataGrid 
+                    Name="dgTarget" Width="730"
+                    IsReadOnly="True" 
+                    HorizontalAlignment="Left" 
+                    SelectionUnit="FullRow" 
+                    Loaded="dgTarget_Loaded" 
+                    SelectionChanged="dgTarget_SelectionChanged" />
+                </WrapPanel>
             </Border>
         </Grid>
     </Border>

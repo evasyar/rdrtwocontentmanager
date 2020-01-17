@@ -7,10 +7,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="980" Width="980">
     <Border BorderBrush="Aquamarine" BorderThickness="1">
-        <Grid>
+        <Grid Background="Aquamarine">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="780"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
@@ -21,49 +21,55 @@
                 <Button Name="btnExit" Content="X" Click="btnExit_Click" />
             </Border>
             <StackPanel Grid.Row="1" Grid.Column="0" >
-                <Border Background="Bisque">
+                <Border Background="Bisque" Height="30">
                     <TextBlock Text="File Map" />
                 </Border>
-                <Border>
+                <Border Height="30">
                     <Button Name="btnSelectFiles" Content="Select file" Click="btnSelectFiles_Click" />
                 </Border>
-                <Border>
+                <Border Height="30">
                     <Button Name="btnDelete" Content="Delete" Click="btnDelete_Click" />
                 </Border>
-                <Border>
+                <Border Height="30">
                     <Button Name="btnRefresh" Content="Refresh" Click="btnRefresh_Click" />
                 </Border>
-                <Border Background="Bisque">
-                    <TextBlock Text="Mod File Applications" />
+                <Border Background="Bisque" Height="30">
+                    <TextBlock Text="Modifier File Applications" />
                 </Border>
-                <Border>
+                <Border Height="30">
                     <Button Name="btnApply" Content="Apply" Click="btnApply_Click" />
                 </Border>
-                <Border>
+                <Border Height="30">
                     <Button Name="btnRemove" Content="Remove" Click="btnRemove_Click" />
                 </Border>
-                <Border>
+                <Border Height="30">
                     <Button Name="btnRemoveAll" Content="Remove All" Click="btnRemoveAll_Click" />
                 </Border>
-                <Border Background="Bisque">
+                <Border Background="Bisque" Height="30">
                     <TextBlock Text="GO" />
                 </Border>
-                <Border>
+                <Border Height="30">
                     <Button Name="btnBack" Content="back" Click="btnBack_Click" />
                 </Border>
             </StackPanel>
             <WrapPanel Grid.Row="1" Grid.Column="1">
-                <Border Background="Bisque">
+                <Border Background="Lavender"  Height="30" Width="780">
+                    <TextBlock Text="Data Entry Group" HorizontalAlignment="Center" />
+                </Border>
+                <Border Background="Bisque" Height="30" Width="100">
                     <TextBlock Text="Custom File" />
                 </Border>
                 <Border>
-                    <TextBox Name="tbCustomFile" Width="624" />
+                    <TextBox Name="tbCustomFile" Width="588" />
                 </Border>
                 <Border>
                     <Button Name="btnAcf" Content="Add Custom File" Click="btnAcf_Click" />
                 </Border>
+                <Border Background="Lavender" Height="30" Width="780">
+                    <TextBlock Text="List Of Modifier Files" HorizontalAlignment="Center" />
+                </Border>
                 <Border>
-                    <DataGrid Name="dgList" AlternatingRowBackground="Bisque" SelectionUnit="FullRow" SelectionMode="Single" Width="778" />
+                    <DataGrid Name="dgList" AlternatingRowBackground="Bisque" SelectionUnit="FullRow" SelectionMode="Single" Width="780" />
                 </Border>
             </WrapPanel>
         </Grid>

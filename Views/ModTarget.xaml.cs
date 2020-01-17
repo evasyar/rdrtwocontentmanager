@@ -60,7 +60,7 @@ namespace rdrtwocontentmanager.Views
             }
         }
 
-        private void bPost_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void btnPost_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             using TargetDbHelper tdb = new TargetDbHelper();
             try
