@@ -38,7 +38,7 @@ namespace rdrtwocontentmanager.Views
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             if (ParentContainer.Content != null) ParentContainer.Content = null;
-            ParentContainer.Content = new ModifierView(ParentContainer, SelectedTarget);
+            ParentContainer.Content = new ModifierView(ParentContainer, SelectedTarget, SelectedMod);
         }
 
         private void btnSelectFiles_Click(object sender, RoutedEventArgs e)

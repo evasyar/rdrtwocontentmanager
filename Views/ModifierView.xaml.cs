@@ -17,11 +17,22 @@ namespace rdrtwocontentmanager.Views
         public ContentControl ParentContainer { get; set; }
         public Target CapTarget { get; set; }
         public Modifier SelectedMod { get; set; }
-        public ModifierView(object parentContainer, Target ParentTarget)
+        public ModifierView()
         {
             InitializeComponent();
+        }
+        public ModifierView(object parentContainer, Target ParentTarget) : this()
+        {
             ParentContainer = (ContentControl)parentContainer;
             CapTarget = ParentTarget;
+            RefreshList(CapTarget);
+        }
+
+        public ModifierView(object parentContainer, Target ParentTarget, Modifier modifier) : this()
+        {
+            ParentContainer = (ContentControl)parentContainer;
+            CapTarget = ParentTarget;
+            SelectedMod = modifier;
             RefreshList(CapTarget);
         }
 
@@ -52,11 +63,12 @@ namespace rdrtwocontentmanager.Views
             try
             {
                 using var mdb = new ModifierDbHelper();
-                mdb.Post(new Modifier() { 
-                    TargetId = CapTarget.Id, 
-                    Name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(tbName.Text), 
-                    ModifierVersion = blVersion.Text, 
-                    Source = tbSource.Text, 
+                mdb.Post(new Modifier()
+                {
+                    TargetId = CapTarget.Id,
+                    Name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(tbName.Text),
+                    ModifierVersion = blVersion.Text,
+                    Source = tbSource.Text,
                     ReleaseDate = Convert.ToDateTime(dpReleaseDate.SelectedDate)
                 });
                 RefreshList(CapTarget);
